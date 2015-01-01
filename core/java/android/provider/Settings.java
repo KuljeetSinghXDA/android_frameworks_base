@@ -9000,6 +9000,12 @@ public final class Settings {
         public static final String PACKAGES_TO_CLEAR_DATA_BEFORE_FULL_RESTORE =
                 "packages_to_clear_data_before_full_restore";
 
+        /** Whether to vibrate when quick settings tile is pressed.
+          *
+          * @hide
+          */
+        public static final String QUICK_SETTINGS_TILES_VIBRATE = "quick_settings_vibrate";
+
         /**
          * Boolean value whether to link ringtone and notification volume
          * @hide
