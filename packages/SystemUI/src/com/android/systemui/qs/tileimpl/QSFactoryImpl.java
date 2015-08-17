@@ -47,6 +47,7 @@ import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.ScreenrecordTile;
 import com.android.systemui.qs.tiles.ScreenshotTile;
 import com.android.systemui.qs.tiles.UserTile;
+import com.android.systemui.qs.tiles.VolumeTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
 import com.android.systemui.qs.QSTileHost;
@@ -123,6 +124,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new GamingModeTile(mHost);
             case "screenshot":
                 return new ScreenshotTile(mHost);
+            case "volume_panel":
+                return new VolumeTile(mHost);
         }
 
         // Intent tiles.
