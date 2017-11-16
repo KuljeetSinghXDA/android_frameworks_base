@@ -158,4 +158,6 @@
     <string name="accessibility_quick_settings_gaming_mode_on">Gaming Mode</string>
     <string name="accessibility_quick_settings_gaming_mode_off">Gaming Mode</string>
 
+    <!-- Screenshot -->
+    <string name="quick_settings_screenshot_label">Screenshot</string>
 </resources>
