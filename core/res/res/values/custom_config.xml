@@ -82,4 +82,7 @@
     <integer name="nav_gesture_swipe_timout">250</integer>
     <!-- signification move threshold - if stays below will trigger action -->
     <integer name="nav_gesture_move_threshold">4</integer>
+
+    <!-- Ambient display music ticker -->
+    <bool name="config_canForceDozeNotifications">true</bool>
 </resources>
