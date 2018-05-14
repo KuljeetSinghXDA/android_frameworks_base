@@ -3534,4 +3534,8 @@
 
     <!-- Enable sms authorization framework-->
     <bool name="config_sms_authorization_enabled">false</bool>
+
+    <!-- List of names that represent dual SoftAp interfaces. -->
+    <string-array translatable="false" name="config_wifi_dual_sap_interfaces">
+    </string-array>
 </resources>
