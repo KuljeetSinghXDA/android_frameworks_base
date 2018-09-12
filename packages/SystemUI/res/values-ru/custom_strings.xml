@@ -51,6 +51,7 @@
   <string name="tuner_show_brightness_new">Отображать ползунок яркости</string>
   <string name="tuner_show_brightness_side_buttons">Отображать боковые кнопки регулятора яркости</string>
   <string name="tuner_brightness_position_bottom">Ползунок яркости внизу</string>
+  <string name="tuner_show_info_header_title">Показать заголовок</string>
   <string name="lockscreen_default">По умолчанию</string>
   <string name="lockscreen_hidden">Нет</string>
   <!-- Shows when people have clicked on the custom lockscreen shortcut [CHAR LIMIT=60] -->
