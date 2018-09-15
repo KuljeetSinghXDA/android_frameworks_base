@@ -188,6 +188,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mBatteryMeterView.setOnClickListener(this);
         mClockView = findViewById(R.id.clock);
         mClockView.setOnClickListener(this);
+        mClockView.setClockHideableByUser(false);
         mDateView = findViewById(R.id.date);
         mDateView.setOnClickListener(this);
     }
@@ -586,7 +587,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     public void setupHost(final QSTileHost host) {
         mHost = host;
         //host.setHeaderView(mExpandIndicator);
-        mHeaderQsPanel.setQSPanelAndHeader(mQsPanel, this);
+        mHeaderQsPanel.setQSPanel(mQsPanel);
         mHeaderQsPanel.setHost(host, null /* No customization in header */);
 
         // Use SystemUI context to get battery meter colors, and let it use the default tint (white)
