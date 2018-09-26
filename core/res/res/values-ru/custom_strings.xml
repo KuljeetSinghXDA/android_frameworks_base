@@ -30,4 +30,10 @@
   <!-- advanced reboot system -->
   <string name="reboot_system_title">Перезапуск системы</string>
   <string name="reboot_system_message">Перезапуск системы\u2026</string>
+
+  <!-- MicroG -->
+  <string name="permlab_fakePackageSignature">Подмена подписи пакета</string>
+  <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+  <string name="permdesc_fakePackageSignature">Приложение сможет притворяться другим приложением. Вредоносные приложения могут использовать это для доступа к личным данным приложений. Легитимное использование включает эмулятор, претендующий на то, что он эмулирует. Предоставляйте это разрешение с осторожностью!</string>
+
 </resources>
