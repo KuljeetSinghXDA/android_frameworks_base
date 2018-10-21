@@ -4535,10 +4535,22 @@ public final class Settings {
         /**
          * @hide
          */
+
         public static final String OMNI_SHOW_CPU_OVERLAY = "show_cpu_overlay";
 
         /** @hide */
         private static final Validator OMNI_SHOW_CPU_OVERLAY_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * whether to enable or disable vibration on succesful fingerprint auth
+         *
+         * @hide
+         */
+        public static final String OMNI_FINGERPRINT_SUCCESS_VIB = "fingerprint_success_vib";
+
+        /** @hide */
+        private static final Validator OMNI_FINGERPRINT_SUCCESS_VIB_VALIDATOR =
                 BOOLEAN_VALIDATOR;
 
         /**
@@ -4671,6 +4683,7 @@ public final class Settings {
             OMNI_BUTTON_BACKLIGHT_TIMEOUT,
             OMNI_BUTTON_BACKLIGHT_ON_TOUCH_ONLY,
             OMNI_SHOW_CPU_OVERLAY,
+            OMNI_FINGERPRINT_SUCCESS_VIB,
         };
 
         /**
@@ -4829,6 +4842,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(OMNI_BUTTON_BACKLIGHT_TIMEOUT);
             PRIVATE_SETTINGS.add(OMNI_BUTTON_BACKLIGHT_ON_TOUCH_ONLY);
             PRIVATE_SETTINGS.add(OMNI_SHOW_CPU_OVERLAY);
+            PRIVATE_SETTINGS.add(OMNI_FINGERPRINT_SUCCESS_VIB);
         }
 
         /**
@@ -4989,6 +5003,8 @@ public final class Settings {
                     OMNI_BUTTON_BACKLIGHT_ON_TOUCH_ONLY_VALIDATOR);
             VALIDATORS.put(OMNI_SHOW_CPU_OVERLAY,
                     OMNI_SHOW_CPU_OVERLAY_VALIDATOR);
+            VALIDATORS.put(OMNI_FINGERPRINT_SUCCESS_VIB,
+                    OMNI_FINGERPRINT_SUCCESS_VIB_VALIDATOR);
         }
 
         /**
@@ -8163,9 +8179,6 @@ public final class Settings {
          */
         public static final String ASSIST_GESTURE_SENSITIVITY = "assist_gesture_sensitivity";
 
-        private static final Validator ASSIST_GESTURE_SENSITIVITY_VALIDATOR =
-                new SettingsValidators.InclusiveFloatRangeValidator(0.0f, 1.0f);
-
         /**
          * Whether the assist gesture should silence alerts.
          *
@@ -8194,8 +8207,6 @@ public final class Settings {
          * @hide
          */
         public static final String ASSIST_GESTURE_SETUP_COMPLETE = "assist_gesture_setup_complete";
-
-        private static final Validator ASSIST_GESTURE_SETUP_COMPLETE_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
          * Control whether Night display is currently activated.
@@ -8659,8 +8670,6 @@ public final class Settings {
             NFC_PAYMENT_DEFAULT_COMPONENT,
             AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN,
             ASSIST_GESTURE_ENABLED,
-            ASSIST_GESTURE_SENSITIVITY,
-            ASSIST_GESTURE_SETUP_COMPLETE,
             ASSIST_GESTURE_SILENCE_ALERTS_ENABLED,
             ASSIST_GESTURE_WAKE_ENABLED,
             VR_DISPLAY_MODE,
@@ -8799,8 +8808,6 @@ public final class Settings {
             VALIDATORS.put(AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN,
                     AUTOMATIC_STORAGE_MANAGER_DAYS_TO_RETAIN_VALIDATOR);
             VALIDATORS.put(ASSIST_GESTURE_ENABLED, ASSIST_GESTURE_ENABLED_VALIDATOR);
-            VALIDATORS.put(ASSIST_GESTURE_SENSITIVITY, ASSIST_GESTURE_SENSITIVITY_VALIDATOR);
-            VALIDATORS.put(ASSIST_GESTURE_SETUP_COMPLETE, ASSIST_GESTURE_SETUP_COMPLETE_VALIDATOR);
             VALIDATORS.put(ASSIST_GESTURE_SILENCE_ALERTS_ENABLED,
                     ASSIST_GESTURE_SILENCE_ALERTS_ENABLED_VALIDATOR);
             VALIDATORS.put(ASSIST_GESTURE_WAKE_ENABLED, ASSIST_GESTURE_WAKE_ENABLED_VALIDATOR);
