@@ -4637,6 +4637,16 @@ public final class Settings {
                 ANY_INTEGER_VALIDATOR;
 
         /**
+         * Weather lockscreen temperature scale
+         * @hide
+         */
+        public static final String WEATHER_LOCKSCREEN_UNIT = "weather_lockscreen_unit";
+
+        /** @hide */
+        private static final Validator WEATHER_LOCKSCREEN_UNIT_VALIDATOR =
+               BOOLEAN_VALIDATOR;
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
@@ -4937,6 +4947,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(OMNI_NETWORK_TRAFFIC_STATE);
             PRIVATE_SETTINGS.add(OMNI_NETWORK_TRAFFIC_AUTOHIDE);
             PRIVATE_SETTINGS.add(OMNI_NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD);
+            PRIVATE_SETTINGS.add(WEATHER_LOCKSCREEN_UNIT);
         }
 
         /**
@@ -5112,6 +5123,7 @@ public final class Settings {
                     OMNI_NETWORK_TRAFFIC_AUTOHIDE_VALIDATOR);
             VALIDATORS.put(OMNI_NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD,
                     OMNI_NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD_VALIDATOR);
+            VALIDATORS.put(WEATHER_LOCKSCREEN_UNIT, WEATHER_LOCKSCREEN_UNIT_VALIDATOR);
         }
 
         /**
