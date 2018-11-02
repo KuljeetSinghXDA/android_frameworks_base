@@ -36,6 +36,6 @@
 
     <style name="TextAppearance.QS.NetworkTraffic">
         <item name="android:textSize">@dimen/net_traffic_text_size</item>
-        <item name="android:fontFamily">monospace</item>
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 </resources>
