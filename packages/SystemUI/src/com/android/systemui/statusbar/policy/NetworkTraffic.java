@@ -56,7 +56,6 @@ public class NetworkTraffic extends TextView implements DarkReceiver {
     private long lastUpdateTime;
     private int txtSize;
     private int txtImgPadding;
-    private boolean mHideArrow;
     private int mAutoHideThreshold;
     private int mTintColor;
 
@@ -150,9 +149,6 @@ public class NetworkTraffic extends TextView implements DarkReceiver {
             resolver.registerContentObserver(Settings.System
                     .getUriFor(Settings.System.NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD), false,
                     this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System
-                    .getUriFor(Settings.System.NETWORK_TRAFFIC_HIDEARROW), false,
-                    this, UserHandle.USER_ALL);
         }
 
         /*
@@ -236,9 +232,6 @@ public class NetworkTraffic extends TextView implements DarkReceiver {
     }
 
     private void updateSettings() {
-        mHideArrow = Settings.System.getIntForUser(mContext.
-                getContentResolver(), Settings.System.NETWORK_TRAFFIC_HIDEARROW,
-                0, UserHandle.USER_CURRENT) == 1;
         if (mIsEnabled) {
             if (getConnectAvailable()) {
                 if (mAttached) {
@@ -273,12 +266,12 @@ public class NetworkTraffic extends TextView implements DarkReceiver {
 
     private void updateTrafficDrawable() {
         int intTrafficDrawable;
-        if (mIsEnabled && !mHideArrow) {
+        if (mIsEnabled) {
             intTrafficDrawable = R.drawable.stat_sys_network_traffic_updown;
         } else {
             intTrafficDrawable = 0;
         }
-        if (intTrafficDrawable != 0 && !mHideArrow) {
+        if (intTrafficDrawable != 0) {
             Drawable d = getContext().getDrawable(intTrafficDrawable);
             d.setColorFilter(mTintColor, Mode.SRC_ATOP);
             setCompoundDrawablePadding(txtImgPadding);
