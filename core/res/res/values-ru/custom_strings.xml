@@ -36,4 +36,7 @@
   <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
   <string name="permdesc_fakePackageSignature">Приложение сможет притворяться другим приложением. Вредоносные приложения могут использовать это для доступа к личным данным приложений. Легитимное использование включает эмулятор, претендующий на то, что он эмулирует. Предоставляйте это разрешение с осторожностью!</string>
 
+    <!-- Ambient play -->
+    <string name="ambient_recognition_notification">Сейчас играет</string>
+    <string name="ambient_recognition_information">%1$s от %2$s</string>
 </resources>
