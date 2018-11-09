@@ -4410,15 +4410,6 @@ public final class Settings {
         /**
          * @hide
          */
-        public static final String OMNIJAWS_WEATHER_ICON_PACK = "omnijaws_weather_icon_pack";
-
-        /** @hide */
-        private static final Validator OMNIJAWS_WEATHER_ICON_PACK_VALIDATOR =
-                ANY_STRING_VALIDATOR;
-
-        /**
-         * @hide
-         */
         public static final String OMNI_SCREENSHOT_SHUTTER_SOUND = "screenshot_shutter_sound";
 
         /** @hide */
@@ -4751,7 +4742,6 @@ public final class Settings {
             OMNI_FAST_BATTERY_LIGHT_COLOR,
             OMNI_FAST_CHARGING_LED_ENABLED,
             OMNI_BATTERY_LIGHT_ONLY_FULLY_CHARGED,
-            OMNIJAWS_WEATHER_ICON_PACK,
             OMNI_SCREENSHOT_SHUTTER_SOUND,
             OMNI_LOCK_POWER_MENU_DISABLED,
             OMNI_DOUBLE_TAP_SLEEP_GESTURE,
@@ -4915,7 +4905,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(OMNI_FAST_BATTERY_LIGHT_COLOR);
             PRIVATE_SETTINGS.add(OMNI_FAST_CHARGING_LED_ENABLED);
             PRIVATE_SETTINGS.add(OMNI_BATTERY_LIGHT_ONLY_FULLY_CHARGED);
-            PRIVATE_SETTINGS.add(OMNIJAWS_WEATHER_ICON_PACK);
             PRIVATE_SETTINGS.add(OMNI_SCREENSHOT_SHUTTER_SOUND);
             PRIVATE_SETTINGS.add(OMNI_LOCK_POWER_MENU_DISABLED);
             PRIVATE_SETTINGS.add(OMNI_DOUBLE_TAP_SLEEP_GESTURE);
@@ -5074,7 +5063,6 @@ public final class Settings {
                     OMNI_FAST_CHARGING_LED_ENABLED_VALIDATOR);
             VALIDATORS.put(OMNI_BATTERY_LIGHT_ONLY_FULLY_CHARGED,
                     OMNI_BATTERY_LIGHT_ONLY_FULLY_CHARGED_VALIDATOR);
-            VALIDATORS.put(OMNIJAWS_WEATHER_ICON_PACK, OMNIJAWS_WEATHER_ICON_PACK_VALIDATOR);
             VALIDATORS.put(OMNI_SCREENSHOT_SHUTTER_SOUND,
                     OMNI_SCREENSHOT_SHUTTER_SOUND_VALIDATOR);
             VALIDATORS.put(OMNI_LOCK_POWER_MENU_DISABLED,
