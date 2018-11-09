@@ -462,9 +462,6 @@ public class KeyguardStatusView extends GridLayout implements
         mKeyguardSlice.setDarkAmount(mDarkAmount);
         mClockView.setTextColor(blendedTextColor);
         mClockSeparator.setBackgroundColor(blendedTextColor);
-        if (mWeatherView != null) {
-            mWeatherView.blendARGB(mDarkAmount);
-        }
     }
 
     private void layoutOwnerInfo() {
