@@ -82,7 +82,6 @@ public class KeyguardStatusView extends GridLayout implements
     private float mWidgetPadding;
     private int mLastLayoutHeight;
     private CurrentWeatherView mWeatherView;
-    private boolean mShowWeather;
 
     private KeyguardUpdateMonitorCallback mInfoCallback = new KeyguardUpdateMonitorCallback() {
 
@@ -490,9 +489,6 @@ public class KeyguardStatusView extends GridLayout implements
             animate = false;
         }
         mKeyguardSlice.setPulsing(pulsing, animate);
-        if (mWeatherView != null) {
-            mWeatherView.setVisibility((mShowWeather && !mPulsing) ? View.VISIBLE : View.GONE);
-        }
         updateDozeVisibleViews();
     }
 
@@ -520,16 +516,16 @@ public class KeyguardStatusView extends GridLayout implements
     private void updateSettings() {
         final ContentResolver resolver = getContext().getContentResolver();
         final Resources res = getContext().getResources();
-        mShowWeather = Settings.System.getIntForUser(resolver,
+        boolean showWeather = Settings.System.getIntForUser(resolver,
                 Settings.System.OMNI_LOCKSCREEN_WEATHER_ENABLED, 0,
                 UserHandle.USER_CURRENT) == 1;
 
         if (mWeatherView != null) {
-            if (mShowWeather) {
+            if (showWeather) {
                 mWeatherView.setVisibility(View.VISIBLE);
                 mWeatherView.enableUpdates();
             }
-            if (!mShowWeather) {
+            if (!showWeather) {
                 mWeatherView.setVisibility(View.GONE);
                 mWeatherView.disableUpdates();
             }
