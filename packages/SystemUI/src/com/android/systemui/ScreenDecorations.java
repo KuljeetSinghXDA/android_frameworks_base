@@ -123,7 +123,7 @@ public class ScreenDecorations extends SystemUI implements Tunable {
         updateRoundedCornerRadii();
 
         Dependency.get(Dependency.MAIN_HANDLER).post(
-                () -> Dependency.get(TunerService.class).addTunable(this, SIZE));
+            () -> Dependency.get(TunerService.class).addTunable(this, SIZE));
 
         if (hasRoundedCorners() || shouldDrawCutout()) {
             setupDecorations();
@@ -371,9 +371,7 @@ public class ScreenDecorations extends SystemUI implements Tunable {
         // screen decorations overlay.
         int padding = mContext.getResources().getDimensionPixelSize(
                 R.dimen.rounded_corner_content_padding);
-        if (padding != 0) {
             setupStatusBarPadding(padding);
-        }
 
     }
 
@@ -454,6 +452,7 @@ public class ScreenDecorations extends SystemUI implements Tunable {
                     else
                         return;
                 }
+
                 int size = mRoundedDefault;
                 int sizeTop = mRoundedDefaultTop;
                 int sizeBottom = mRoundedDefaultBottom;
@@ -470,6 +469,7 @@ public class ScreenDecorations extends SystemUI implements Tunable {
                 if (sizeBottom == 0) {
                     sizeBottom = size;
                 }
+
                 updateWindowVisibilities();
                 setSize(mOverlay.findViewById(R.id.left), sizeTop);
                 setSize(mOverlay.findViewById(R.id.right), sizeTop);
