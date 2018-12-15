@@ -57,7 +57,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     SystemUI-proto \
     apache-commons-lang-2.6
 
-LOCAL_JAVA_LIBRARIES := telephony-common \
+LOCAL_JAVA_LIBRARIES := telephony-common telephony-ext \
     android.car
 
 LOCAL_PACKAGE_NAME := SystemUI

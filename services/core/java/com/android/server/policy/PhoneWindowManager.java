@@ -1005,6 +1005,15 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
     };
 
+    private UEventObserver mExtEventObserver = new UEventObserver() {
+        @Override
+        public void onUEvent(UEventObserver.UEvent event) {
+            if (event.get("status") != null) {
+                setHdmiPlugged("connected".equals(event.get("status")));
+            }
+        }
+    };
+
     class SettingsObserver extends ContentObserver {
         SettingsObserver(Handler handler) {
             super(handler);
@@ -1075,6 +1084,12 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.OMNI_LONG_PRESS_POWER_TORCH), false, this,
+                    UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.OMNI_BOTTOM_GESTURE_TRIGGER_TIMEOUT), false, this,
+                    UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.OMNI_BOTTOM_GESTURE_SWIPE_LIMIT), false, this,
                     UserHandle.USER_ALL);
             updateSettings();
         }
@@ -2672,6 +2687,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         if (mGestureButtonRegistered && !mUseGestureButton) {
             mWindowManagerFuncs.unregisterPointerEventListener(mGestureButton);
             mGestureButtonRegistered = false;
+        }
+        if(mUseGestureButton && mGestureButton != null) {
+            mGestureButton.updateSettings();
         }
     }
 
@@ -6116,6 +6134,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
     void setHdmiPlugged(boolean plugged) {
         if (mHdmiPlugged != plugged) {
+            Slog.v(TAG, "Broadcasting Intent for HDMI HPD :"+plugged);
             mHdmiPlugged = plugged;
             updateRotation(true, true);
             Intent intent = new Intent(ACTION_HDMI_PLUGGED);
@@ -6136,6 +6155,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
     void initializeHdmiStateInternal() {
         boolean plugged = false;
+        mExtEventObserver.startObserving("mdss_mdp/drm/card");
         // watch for HDMI plug messages if the hdmi switch exists
         if (new File("/sys/devices/virtual/switch/hdmi/state").exists()) {
             mHDMIObserver.startObserving("DEVPATH=/devices/virtual/switch/hdmi");
