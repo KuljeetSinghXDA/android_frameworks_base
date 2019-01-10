@@ -216,11 +216,6 @@
     <protected-broadcast android:name="com.android.settingslib.action.REGISTER_SLICE_RECEIVER" />
     <protected-broadcast android:name="com.android.settingslib.action.UNREGISTER_SLICE_RECEIVER" />
 
-    <!-- Ambient Indication -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="org.pixelexperience.ambient.play.history.MANAGE_HISTORY" />
-
     <!-- Weather on lockscreen -->
     <uses-permission android:name="org.pixelexperience.weather.client.READ_WEATHER" />
 

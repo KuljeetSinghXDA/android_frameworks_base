@@ -4544,39 +4544,6 @@ public final class Settings {
                 BOOLEAN_VALIDATOR;
 
         /**
-         * Whether Ambient Play enabled/disabled
-         *
-         * @hide
-         */
-        public static final String AMBIENT_RECOGNITION = "ambient_recognition";
-
-        /** @hide */
-        private static final Validator AMBIENT_RECOGNITION_VALIDATOR =
-                BOOLEAN_VALIDATOR;
-
-        /**
-         * Whether Ambient Play is shown on the lockscreen
-         *
-         * @hide
-         */
-        public static final String AMBIENT_RECOGNITION_KEYGUARD = "ambient_recognition_keyguard";
-
-        /** @hide */
-        private static final Validator AMBIENT_RECOGNITION_KEYGUARD_VALIDATOR =
-                BOOLEAN_VALIDATOR;
-
-        /**
-         * Whether Ambient Play notification is enabled
-         *
-         * @hide
-         */
-        public static final String AMBIENT_RECOGNITION_NOTIFICATION = "ambient_recognition_notification";
-
-        /** @hide */
-        private static final Validator AMBIENT_RECOGNITION_NOTIFICATION_VALIDATOR =
-                BOOLEAN_VALIDATOR;
-
-        /**
          * @hide
          */
         public static final String OMNI_LONG_PRESS_POWER_TORCH =
@@ -4961,9 +4928,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(OMNI_BUTTON_BACKLIGHT_ON_TOUCH_ONLY);
             PRIVATE_SETTINGS.add(OMNI_SHOW_CPU_OVERLAY);
             PRIVATE_SETTINGS.add(OMNI_FINGERPRINT_SUCCESS_VIB);
-            PRIVATE_SETTINGS.add(AMBIENT_RECOGNITION);
-            PRIVATE_SETTINGS.add(AMBIENT_RECOGNITION_KEYGUARD);
-            PRIVATE_SETTINGS.add(AMBIENT_RECOGNITION_NOTIFICATION);
             PRIVATE_SETTINGS.add(OMNI_LONG_PRESS_POWER_TORCH);
             PRIVATE_SETTINGS.add(OMNI_LOCKSCREEN_HIDE_MEDIA);
             PRIVATE_SETTINGS.add(OMNI_NETWORK_TRAFFIC_ENABLE);
@@ -5136,9 +5100,6 @@ public final class Settings {
                     OMNI_SHOW_CPU_OVERLAY_VALIDATOR);
             VALIDATORS.put(OMNI_FINGERPRINT_SUCCESS_VIB,
                     OMNI_FINGERPRINT_SUCCESS_VIB_VALIDATOR);
-            VALIDATORS.put(AMBIENT_RECOGNITION, AMBIENT_RECOGNITION_VALIDATOR);
-            VALIDATORS.put(AMBIENT_RECOGNITION_KEYGUARD, AMBIENT_RECOGNITION_KEYGUARD_VALIDATOR);
-            VALIDATORS.put(AMBIENT_RECOGNITION_NOTIFICATION, AMBIENT_RECOGNITION_NOTIFICATION_VALIDATOR);
             VALIDATORS.put(OMNI_LONG_PRESS_POWER_TORCH, OMNI_LONG_PRESS_POWER_TORCH_VALIDATOR);
             VALIDATORS.put(OMNI_LOCKSCREEN_HIDE_MEDIA, OMNI_LOCKSCREEN_HIDE_MEDIA_VALIDATOR);
             VALIDATORS.put(OMNI_NETWORK_TRAFFIC_ENABLE,
@@ -8476,7 +8437,7 @@ public final class Settings {
         public static final String MANAGED_PROFILE_CONTACT_REMOTE_SEARCH =
                 "managed_profile_contact_remote_search";
 
-	    /**
+        /**
          * Whether or not the automatic storage manager is enabled and should run on the device.
          *
          * @hide
