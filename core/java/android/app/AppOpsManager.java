@@ -670,7 +670,7 @@ public class AppOpsManager {
             OP_SYSTEM_ALERT_WINDOW,
             OP_WRITE_SETTINGS,
             OP_REQUEST_INSTALL_PACKAGES,
-            OP_START_FOREGROUND,
+            OP_START_FOREGROUND
     };
 
     /**
@@ -759,7 +759,7 @@ public class AppOpsManager {
             OP_ACCEPT_HANDOVER,                 // ACCEPT_HANDOVER
             OP_MANAGE_IPSEC_TUNNELS,            // MANAGE_IPSEC_HANDOVERS
             OP_START_FOREGROUND,                // START_FOREGROUND
-            OP_BLUETOOTH_SCAN,                  // BLUETOOTH_SCAN
+            OP_FINE_LOCATION,                   // BLUETOOTH_SCAN
             OP_BLUETOOTH_CHANGE,                // BLUETOOTH_CHANGE
             OP_BOOT_COMPLETED,                  // BOOT_COMPLETED
             OP_NFC_CHANGE,                      // NFC_CHANGE
