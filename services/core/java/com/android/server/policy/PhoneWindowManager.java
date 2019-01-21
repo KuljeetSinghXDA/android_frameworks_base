@@ -68,7 +68,6 @@ import static android.view.WindowManager.LayoutParams.LAST_SUB_WINDOW;
 import static android.view.WindowManager.LayoutParams.LAST_SYSTEM_WINDOW;
 import static android.view.WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS;
 import static android.view.WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_DEFAULT;
-import static android.view.WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER;
 import static android.view.WindowManager.LayoutParams.MATCH_PARENT;
 import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_ACQUIRES_SLEEP_TOKEN;
 import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_FORCE_DRAW_STATUS_BAR_BACKGROUND;
@@ -891,7 +890,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     private GestureButton mGestureButton;
     private boolean mGestureButtonRegistered;
     private boolean mGlobalActionsOnLockDisable;
-    private boolean mHideNotch;
     private boolean mLongPressPowerTorch;
 
     private static final int KEY_ACTION_TOGGLE_TORCH = 9;
@@ -1092,9 +1090,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     Settings.System.OMNI_LOCK_POWER_MENU_DISABLED), false, this,
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.OMNI_HIDE_NOTCH), false, this,
-                    UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.OMNI_LONG_PRESS_POWER_TORCH), false, this,
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -1103,6 +1098,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.OMNI_BOTTOM_GESTURE_SWIPE_LIMIT), false, this,
                     UserHandle.USER_ALL);
+
             updateSettings();
         }
 
@@ -2749,9 +2745,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             mGlobalActionsOnLockDisable = Settings.System.getIntForUser(resolver,
                     Settings.System.OMNI_LOCK_POWER_MENU_DISABLED, 0,
                     UserHandle.USER_CURRENT) != 0;
-            mHideNotch = Settings.System.getIntForUser(resolver,
-                    Settings.System.OMNI_HIDE_NOTCH, 0,
-                    UserHandle.USER_CURRENT) != 0;
             mLongPressPowerTorch = Settings.System.getIntForUser(resolver,
                     Settings.System.OMNI_LONG_PRESS_POWER_TORCH, 0,
                     UserHandle.USER_CURRENT) != 0;
@@ -3054,10 +3047,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         if (attrs.type != TYPE_STATUS_BAR) {
             // The status bar is the only window allowed to exhibit keyguard behavior.
             attrs.privateFlags &= ~WindowManager.LayoutParams.PRIVATE_FLAG_KEYGUARD;
-        }
-
-        if (mHideNotch) {
-            attrs.layoutInDisplayCutoutMode = LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER;
         }
     }
 
