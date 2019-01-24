@@ -179,4 +179,7 @@
   <!-- Language toggle tile -->
   <string name="quick_settings_locale_label">Язык</string>
   <string name="quick_settings_locale_more_locales_toast">Пожалуйста, настройте несколько языков, чтобы включить функцию переключения</string>
+  <string name="tuner_bluetooth_show_connected_title">Показывать bluetooth только при подключении</string>
+  <string name="tuner_show_drag_handle">Показать маркер</string>
+  <string name="tuner_hide_disabled_sim">Скрыть отключенные сим-карты</string>
 </resources>
