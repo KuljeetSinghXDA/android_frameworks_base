@@ -116,16 +116,16 @@ public class WeatherClient {
         }
     }
 
-    public static boolean isAvailable(Context context) {    
-        final PackageManager pm = context.getPackageManager();  
-        try {   
-            pm.getPackageInfo(SERVICE_PACKAGE, PackageManager.GET_ACTIVITIES);  
-            int enabled = pm.getApplicationEnabledSetting(SERVICE_PACKAGE); 
-            return enabled != PackageManager.COMPONENT_ENABLED_STATE_DISABLED &&    
-                    enabled != PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER;    
-        } catch (PackageManager.NameNotFoundException e) {  
-            return false;   
-        }   
+    public static boolean isAvailable(Context context) {
+        final PackageManager pm = context.getPackageManager();
+        try {
+            pm.getPackageInfo(SERVICE_PACKAGE, PackageManager.GET_ACTIVITIES);
+            int enabled = pm.getApplicationEnabledSetting(SERVICE_PACKAGE);
+            return enabled != PackageManager.COMPONENT_ENABLED_STATE_DISABLED &&
+                    enabled != PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 
     private int getRandomInt() {
@@ -301,8 +301,9 @@ public class WeatherClient {
         }
 
         public int getWeatherConditionImage() {
-            if (conditionsToDrawableMap.containsKey(conditions))
+            if (conditionsToDrawableMap.containsKey(conditions)){
                 return conditionsToDrawableMap.get(conditions);
+            }
             return 0;
         }
 
