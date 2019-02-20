@@ -182,4 +182,18 @@
   <string name="tuner_bluetooth_show_connected_title">Показывать bluetooth только при подключении</string>
   <string name="tuner_show_drag_handle">Показать маркер</string>
   <string name="tuner_hide_disabled_sim">Скрыть отключенные сим-карты</string>
+
+  <string name="tuner_keyguard_battery_percent_title">Показать процент заряда батареи</string>
+  <string name="tuner_keyguard_battery_percent_summary">Всегда показывать процент заряда батареи в строке состояния при зарядке</string>
+  <string name="tuner_keyguard_show_watt_title">Показать ватты</string>
+  <string name="tuner_keyguard_show_watt_summary">Показать текущее значение зарядки в мВт</string>
+  <string name="tuner_keyguard_show_battery_bar_title">Показать полоску батареи</string>
+  <string name="tuner_keyguard_show_battery_bar_summary">Показывать полоску батареи при зарядке на AOD</string>
+  <string name="tuner_keyguard_show_battery_bar_always_title">Всегда показывать полоску батареи</string>
+  <string name="tuner_keyguard_show_battery_bar_always_summary">Всегда показывать полоску батареи при зарядке</string>
+
+  <string-array name="nav_bar_layouts_new">
+    <item>Обычное</item>
+    <item>Компактное</item>
+  </string-array>
 </resources>
