@@ -42,6 +42,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemProperties;
 import android.support.annotation.ColorInt;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
@@ -78,7 +80,9 @@ import com.android.systemui.shared.system.WindowManagerWrapper;
 import com.android.systemui.stackdivider.Divider;
 import com.android.systemui.statusbar.policy.DeadZone;
 import com.android.systemui.statusbar.policy.KeyButtonDrawable;
+import com.android.systemui.statusbar.policy.KeyButtonView;
 import com.android.systemui.statusbar.policy.TintedKeyButtonDrawable;
+import com.android.systemui.tuner.TunerService;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -89,7 +93,8 @@ import static com.android.systemui.shared.system.NavigationBarCompat.FLAG_SHOW_O
 import static com.android.systemui.shared.system.NavigationBarCompat.HIT_TARGET_OVERVIEW;
 import static com.android.systemui.shared.system.NavigationBarCompat.HIT_TARGET_ROTATION;
 
-public class NavigationBarView extends FrameLayout implements PluginListener<NavGesture> {
+public class NavigationBarView extends FrameLayout implements PluginListener<NavGesture>,
+        TunerService.Tunable {
     final static boolean DEBUG = false;
     final static String TAG = "StatusBar/NavBarView";
 
@@ -129,6 +134,8 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
     private KeyButtonDrawable mImeIcon;
     private KeyButtonDrawable mMenuIcon;
     private KeyButtonDrawable mAccessibilityIcon;
+    private KeyButtonDrawable mArrowLeftIcon;
+    private KeyButtonDrawable mArrowRightIcon;
     private TintedKeyButtonDrawable mRotateSuggestionIcon;
 
     private GestureHelper mGestureHelper;
@@ -453,6 +460,10 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
                 && ((mOverviewProxyService.getInteractionFlags() & FLAG_DISABLE_QUICK_SCRUB) == 0);
     }
 
+    public KeyButtonView getKeyButtonViewById(int id) {
+          return (KeyButtonView) getCurrentView().findViewById(id);
+    }
+
     // TODO(b/80003212): change car mode icons to vector icons.
     private void updateCarModeIcons(Context ctx) {
         mBackCarModeIcon = getDrawable(ctx,
@@ -490,6 +501,11 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
                     R.drawable.ic_sysbar_accessibility_button, false /* hasShadow */);
 
             mImeIcon = getDrawable(lightContext, darkContext, R.drawable.ic_ime_switcher_default,
+                    false /* hasShadow */);
+
+            mArrowLeftIcon = getDrawable(lightContext, darkContext, R.drawable.ic_navbar_chevron_left,
+                    false /* hasShadow */);
+            mArrowRightIcon = getDrawable(lightContext, darkContext, R.drawable.ic_navbar_chevron_right,
                     false /* hasShadow */);
 
             updateRotateSuggestionButtonStyle(mRotateBtnStyle, false);
@@ -579,7 +595,11 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
     }
 
     public void setNavigationIconHints(int hints) {
-        if (hints == mNavigationIconHints) return;
+        setNavigationIconHints(hints, false);
+    }
+
+    public void setNavigationIconHints(int hints, boolean force) {
+        if (!force && hints == mNavigationIconHints) return;
         final boolean backAlt = (hints & StatusBarManager.NAVIGATION_HINT_BACK_ALT) != 0;
         if ((mNavigationIconHints & StatusBarManager.NAVIGATION_HINT_BACK_ALT) != 0 && !backAlt) {
             mTransitionListener.onBackAltCleared();
@@ -630,9 +650,10 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
 
         // Update IME button visibility, a11y and rotate button always overrides the appearance
         final boolean showImeButton =
-                !mShowAccessibilityButton &&
+                !mShowAccessibilityButton && !showDpadArrowKeys() &&
                         !mShowRotateButton &&
                         ((mNavigationIconHints & StatusBarManager.NAVIGATION_HINT_IME_SHOWN) != 0);
+
         getImeSwitchButton().setVisibility(showImeButton ? View.VISIBLE : View.INVISIBLE);
         getImeSwitchButton().setImageDrawable(mImeIcon);
 
@@ -647,7 +668,15 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
         setAccessibilityButtonState(mShowAccessibilityButton, mLongClickableAccessibilityButton);
         getAccessibilityButton().setImageDrawable(mAccessibilityIcon);
 
+        // Update arrow buttons
+        if (showDpadArrowKeys()) {
+            getKeyButtonViewById(R.id.dpad_left).setImageDrawable(mArrowLeftIcon);
+            getKeyButtonViewById(R.id.dpad_right).setImageDrawable(mArrowRightIcon);
+        }
+
         mBarTransitions.reapplyDarkIntensity();
+
+        updateDpadKeys();
 
         boolean disableHome = ((mDisabledFlags & View.STATUS_BAR_DISABLE_HOME) != 0);
 
@@ -1144,6 +1173,7 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         Dependency.get(PluginManager.class).removePluginListener(this);
+        Dependency.get(TunerService.class).removeTunable(this);
         if (mGestureHelper != null) {
             mGestureHelper.destroy();
         }
@@ -1173,6 +1203,11 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
         }
         mGestureHelper = defaultHelper;
         updateTaskSwitchHelper();
+    }
+
+    @Override
+    public void onTuningChanged(String key, String newValue) {
+        setNavigationIconHints(mNavigationIconHints, true);
     }
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
@@ -1236,8 +1271,21 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
         void onVerticalChanged(boolean isVertical);
     }
 
+    public void updateDpadKeys() {
+        final int visibility = showDpadArrowKeys() && (mNavigationIconHints
+                & StatusBarManager.NAVIGATION_HINT_BACK_ALT) != 0 ? View.VISIBLE : View.GONE;
+
+        getKeyButtonViewById(R.id.dpad_left).setVisibility(visibility);
+        getKeyButtonViewById(R.id.dpad_right).setVisibility(visibility);
+    }
+
     private final Consumer<Boolean> mDockedListener = exists -> mHandler.post(() -> {
         mDockedStackExists = exists;
         updateRecentsIcon();
     });
+
+    public boolean showDpadArrowKeys() {
+        return Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.OMNI_NAVIGATION_BAR_ARROW_KEYS, 0, UserHandle.USER_CURRENT) != 0;
+    }
 }
