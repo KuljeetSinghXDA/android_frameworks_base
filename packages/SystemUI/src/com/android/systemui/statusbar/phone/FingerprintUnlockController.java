@@ -207,7 +207,7 @@ public class FingerprintUnlockController extends KeyguardUpdateMonitorCallback {
             if (mStatusBar.wallpaperSupportsAmbientMode()) {
                 // Don't show any animation when live wallpaper is showing
                 mMode = MODE_WAKE_AND_UNLOCK;
-            }else{
+            } else {
                 // If we are waking the device up while we are pulsing the clock and the
                 // notifications would light up first, creating an unpleasant animation.
                 // Defer changing the screen brightness by forcing doze brightness on our window
