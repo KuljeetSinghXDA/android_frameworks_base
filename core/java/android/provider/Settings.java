@@ -4786,6 +4786,16 @@ public final class Settings {
                 BOOLEAN_VALIDATOR;
 
         /**
+         * Enable face auto unlock on secure lock screens
+         *
+         * @hide
+         */
+        public static final String OMNI_FACE_AUTO_UNLOCK = "face_auto_unlock";
+
+        private static final Validator OMNI_FACE_AUTO_UNLOCK_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
@@ -4925,7 +4935,8 @@ public final class Settings {
             OMNI_VIBRATE_ON_DISCONNECT,
             OMNI_DOZE_ON_CHARGE,
             OMNI_NAVIGATION_BAR_ARROW_KEYS,
-            OMNI_VOLUME_BUTTON_MUSIC_CONTROL
+            OMNI_VOLUME_BUTTON_MUSIC_CONTROL,
+            OMNI_FACE_AUTO_UNLOCK,
         };
 
         /**
@@ -5107,6 +5118,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(OMNI_DOZE_ON_CHARGE);
             PRIVATE_SETTINGS.add(OMNI_NAVIGATION_BAR_ARROW_KEYS);
             PRIVATE_SETTINGS.add(OMNI_VOLUME_BUTTON_MUSIC_CONTROL);
+            PRIVATE_SETTINGS.add(OMNI_FACE_AUTO_UNLOCK);
         }
 
         /**
@@ -5311,6 +5323,8 @@ public final class Settings {
                     OMNI_NAVIGATION_BAR_ARROW_KEYS_VALIDATOR);
             VALIDATORS.put(OMNI_VOLUME_BUTTON_MUSIC_CONTROL,
                     OMNI_VOLUME_BUTTON_MUSIC_CONTROL_VALIDATOR);
+            VALIDATORS.put(OMNI_FACE_AUTO_UNLOCK,
+                    OMNI_FACE_AUTO_UNLOCK_VALIDATOR);
         }
 
         /**
