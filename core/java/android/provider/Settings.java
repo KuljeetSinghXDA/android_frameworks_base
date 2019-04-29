@@ -4826,6 +4826,15 @@ public final class Settings {
         public static final String FORCE_AMBIENT_FOR_MEDIA = "force_ambient_for_media";
 
         /**
+         * Force full screen for devices with cutout
+         * @hide
+         */
+        public static final String FORCE_FULLSCREEN_CUTOUT_APPS = "force_full_screen_cutout_apps";
+
+         /** @hide */
+        private static final Validator FORCE_FULLSCREEN_CUTOUT_APPS_VALIDATOR = ANY_STRING_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -4953,6 +4962,7 @@ public final class Settings {
             OMNI_NAVIGATION_BAR_ARROW_KEYS,
             OMNI_VOLUME_BUTTON_MUSIC_CONTROL,
             OMNI_FACE_AUTO_UNLOCK,
+            FORCE_FULLSCREEN_CUTOUT_APPS
         };
 
         /**
@@ -5136,6 +5146,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(OMNI_NAVIGATION_BAR_ARROW_KEYS);
             PRIVATE_SETTINGS.add(OMNI_VOLUME_BUTTON_MUSIC_CONTROL);
             PRIVATE_SETTINGS.add(OMNI_FACE_AUTO_UNLOCK);
+            PRIVATE_SETTINGS.add(FORCE_FULLSCREEN_CUTOUT_APPS);
         }
 
         /**
@@ -5344,6 +5355,8 @@ public final class Settings {
                     OMNI_VOLUME_BUTTON_MUSIC_CONTROL_VALIDATOR);
             VALIDATORS.put(OMNI_FACE_AUTO_UNLOCK,
                     OMNI_FACE_AUTO_UNLOCK_VALIDATOR);
+            VALIDATORS.put(FORCE_FULLSCREEN_CUTOUT_APPS,
+                    FORCE_FULLSCREEN_CUTOUT_APPS_VALIDATOR);
         }
 
         /**
