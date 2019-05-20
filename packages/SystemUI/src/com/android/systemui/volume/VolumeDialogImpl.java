@@ -206,7 +206,6 @@ public class VolumeDialogImpl implements VolumeDialog {
         mWindow.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         mDialog.setCanceledOnTouchOutside(true);
-        mDialog.setContentView(R.layout.volume_dialog);
         mDialog.setOnShowListener(dialog -> {
             if (!isLandscape()) mDialogView.setTranslationX(mDialogView.getWidth() / 2);
             mDialogView.setAlpha(0);
@@ -239,17 +238,6 @@ public class VolumeDialogImpl implements VolumeDialog {
 
         mDialogRowsView = mDialog.findViewById(R.id.volume_dialog_rows);
         mRinger = mDialog.findViewById(R.id.ringer);
-        mExpandRowsView = mDialog.findViewById(R.id.expandable_indicator_container);
-        mExpandRows = mDialog.findViewById(R.id.expandable_indicator);
-        if(!isAudioPanelOnLeftSide()) {
-            mRinger.setForegroundGravity(Gravity.RIGHT);
-            mExpandRows.setForegroundGravity(Gravity.RIGHT);
-            mExpandRows.setRotation(90);
-        } else {
-            mRinger.setForegroundGravity(Gravity.LEFT);
-            mExpandRows.setForegroundGravity(Gravity.LEFT);
-            mExpandRows.setRotation(-90);
-        }
         mRingerIcon = mRinger.findViewById(R.id.ringer_icon);
         mZenIcon = mRinger.findViewById(R.id.dnd_icon);
 
